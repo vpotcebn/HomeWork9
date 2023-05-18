@@ -22,7 +22,9 @@ public class TestPostmanWebPage {
 
 
     static Stream<Arguments> checkFooterContent() {
-        return Stream.of(Arguments.of(Footer.Product, List.of("What is Postman?", "API Repository", "Tools", "Governance", "Workspace", "Integrations", "Enterprise", "Plans and pricing", "Download the app", "Support center")), Arguments.of(Footer.Company, List.of("About", "Careers and Culture", "Press & Media", "Contact Us", "Partner program")), Arguments.of(Footer.Social, List.of("Twitter", "LinkedIn", "Github", "YouTube", "Twitch"))
+        return Stream.of(Arguments.of(Footer.PRODUCT, List.of("What is Postman?", "API Repository", "Tools", "Governance", "Workspace", "Integrations", "Enterprise", "Plans and pricing", "Download the app", "Support center")),
+                Arguments.of(Footer.COMPANY, List.of("About", "Careers and Culture", "Press & Media", "Contact Us", "Partner program")),
+                Arguments.of(Footer.SOCIAL, List.of("Twitter", "LinkedIn", "Github", "YouTube", "Twitch"))
 
         );
     }
@@ -51,8 +53,8 @@ public class TestPostmanWebPage {
     @MethodSource
     @ParameterizedTest(name = "Проверить, что в футере заголовок {0} видим и под ним присутствуют элементы {1}")
     void checkFooterContent(Footer footer, List<String> expectedValues) {
-        $("[data-test=homepage-footer]").$(byText(footer.name())).shouldBe(visible);
-        $("[data-test=homepage-footer]").$(byText(footer.name())).parent().lastChild().$$("a").shouldHave(texts(expectedValues));
+        $("[data-test=homepage-footer]").$(byText(footer.getDesc())).shouldBe(visible);
+        $("[data-test=homepage-footer]").$(byText(footer.getDesc())).parent().lastChild().$$("a").shouldHave(texts(expectedValues));
 
     }
 }
